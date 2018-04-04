@@ -34,6 +34,20 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>Weather endpoint</key>
+	<dict>
+		<key>url</key>
+		<string>$(WEATHER_API_HOST_NAME)+$(WEATHER_API_KEY)+/</string>
+		<key>api_key</key>
+		<string>$(WEATHER_API_KEY)</string>
+	</dict>
+	<key>Geolocation endpoint</key>
+	<dict>
+		<key>url</key>
+		<string>$(GEOLOCATION_API_HOST_NAME)</string>
+		<key>api_key</key>
+		<string>$(GEOLOCATION_API_USERNAME)</string>
+	</dict>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
