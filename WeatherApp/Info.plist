@@ -37,7 +37,7 @@
 	<key>Weather endpoint</key>
 	<dict>
 		<key>url</key>
-		<string>$(WEATHER_API_HOST_NAME)+$(WEATHER_API_KEY)+/</string>
+		<string>$(WEATHER_API_HOST_NAME)$(WEATHER_API_KEY)/</string>
 		<key>api_key</key>
 		<string>$(WEATHER_API_KEY)</string>
 	</dict>

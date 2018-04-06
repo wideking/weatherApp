@@ -7,8 +7,14 @@
 //
 
 import Foundation
+public enum AppErrors : Error{
+    case CityNotSelected
+}
+
 enum NetworkError:Error{
-    case urlError(URLError)
-    case unknownError(Error)
-    case empty
+    case UrlError(URLError)
+    case UnknownError(Error)
+    case SerializationFailed
+    case ParseFailed
+    case Empty
 }

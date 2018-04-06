@@ -13,4 +13,8 @@ struct Configuration {
         let weatherDictionary = Bundle.main.infoDictionary!["Weather endpoint"] as! Dictionary<String,String>
         return ServerData(url:weatherDictionary["url"]!,apiKey:weatherDictionary["api_key"]!)
     }()
+    static let geolocationServer : ServerData = {
+        let geolocationDictionary = Bundle.main.infoDictionary!["Geolocation endpoint"] as! Dictionary<String,String>
+        return ServerData(url:geolocationDictionary["url"]!,apiKey:geolocationDictionary["api_key"]!)
+    }()
 }

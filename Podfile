@@ -7,9 +7,14 @@ target 'WeatherApp' do
 
   # Pods for WeatherApp
     pod 'Alamofire', '~> 4.7'
+    pod 'RxSwift',    '~> 4.0'
+    pod 'RxCocoa',    '~> 4.0'
+    pod 'RealmSwift'
 
   target 'WeatherAppTests' do
     inherit! :search_paths
+    pod 'RxBlocking', '~> 4.0'
+    pod 'RxTest',     '~> 4.0'
     # Pods for testing
   end
 

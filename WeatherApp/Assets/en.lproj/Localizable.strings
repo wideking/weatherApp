@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  WeatherApp
+
+  Created by Korisnik on 06/04/2018.
+  Copyright © 2018 Korisnik. All rights reserved.
+*/
+"loading_weather" = "Loading weather data";
+"general_error" = "Something went wrong. Please Try again.";
