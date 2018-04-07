@@ -11,5 +11,6 @@ enum R{
     struct Colors {
         static let grey = UIColor.gray
         static let black = UIColor.black
+        static let white = UIColor.white
     }
 }

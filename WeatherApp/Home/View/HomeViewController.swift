@@ -9,22 +9,22 @@ import RxSwift
 import RxCocoa
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, LoaderProtocol {
     //Mark: Properties
     private var disposableBag = DisposeBag()
     let homeViewModel :HomeViewModelProtocol = HomeViewModel(selectedCityApi: SelectedCityApi(), weatherApi: WeatherApi())
     //Views
-    var loader : UILoaderView?
+    var loader: UILoaderView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //initialize data retrival
-        homeViewModel.getData()
+        //initialize data observers
         initializeLoaderDriver()
         initializeLocationDriver()
+        //initialize data retrival
+        homeViewModel.getData()
+        
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -48,7 +48,6 @@ class ViewController: UIViewController {
     }
     
     private func initializeLocationDriver(){
-        
         homeViewModel.location
             //as driver automatically handles UI thread change and it handles error events.
             .asDriver { (error) -> SharedSequence<DriverSharingStrategy, SelectedCity> in
@@ -62,7 +61,6 @@ class ViewController: UIViewController {
     }
     
     private func initializeWeatherDriver(){
-        
         homeViewModel.weather
             //as driver automatically handles UI thread change and it handles error events.
             .asDriver { (error) -> SharedSequence<DriverSharingStrategy, Weather> in
@@ -75,18 +73,6 @@ class ViewController: UIViewController {
             .disposed(by: disposableBag)
     }
     
-    //Mark Loader methods
-    private func showLoaderView(){
-        if(loader == nil){
-            //todo is this a proper way of positioning? (full screen and center content? Should I make changes to the custom view?
-           let loader = UILoaderView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
-            loader.label.text = "loading_weather".localizedLowercase
-            self.view.addSubview(loader)
-        }
-        
-    }
-    private func hideLoaderView(){
-        
-    }
+    
 }
 
