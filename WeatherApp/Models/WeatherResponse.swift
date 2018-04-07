@@ -10,12 +10,16 @@ import Foundation
 struct WeatherResponse : Codable {
     let latitude : Double
     let longitude: Double
-    let weather : Weather
+    let dailyWeatherResponse : DailyWeatherResponse
+    let currentWeather : CurrentWeather
     
     enum CodingKeys: String, CodingKey {
-        case weather = "currently"
+        case dailyWeatherResponse = "daily"
+        case currentWeather = "currently"
         //keys are same as in response
         case latitude
         case longitude
     }
+    
+    
 }

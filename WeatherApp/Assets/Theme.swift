@@ -18,4 +18,7 @@ struct Theme {
     static func getExtraFont() -> UIFont {
     return UIFont.systemFont(ofSize: extraFontSize)
     }
+    static func getHugeFont() -> UIFont {
+        return UIFont.systemFont(ofSize: hugeFontSize)
+    }
 }

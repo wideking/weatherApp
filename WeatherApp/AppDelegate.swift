@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Realm
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -16,6 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //check if it's first launch. If it is - initialze realm.
+        let isFirstLaunch = UserDefaults.standard.bool(forKey: FIRST_LAUNCH)
+        if(!isFirstLaunch){
+            let settingsApi = SettingsApi()
+            let saved = settingsApi.saveSettings(settings: Settings.defaultSettings)
+            
+            if(saved){
+               UserDefaults.standard.set(true, forKey: FIRST_LAUNCH)
+            }
+        }
         return true
     }
 

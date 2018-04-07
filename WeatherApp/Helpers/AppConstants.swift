@@ -10,5 +10,8 @@ import Foundation
 let FIRST_LAUNCH = "first_launch"
 extension String{
     static let empty : String = ""
+    static func percentage<T>(data :T) -> String{
+        return "\(data)\u{25}"
+    }
 }
 

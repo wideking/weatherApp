@@ -15,6 +15,7 @@ enum NetworkError:Error{
     case UrlError(URLError)
     case UnknownError(Error)
     case SerializationFailed
+    case DatabaseReadFailed
     case ParseFailed
     case Empty
 }

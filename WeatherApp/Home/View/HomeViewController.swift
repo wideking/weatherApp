@@ -12,7 +12,7 @@ import UIKit
 class ViewController: UIViewController, LoaderProtocol {
     //Mark: Properties
     private var disposableBag = DisposeBag()
-    let homeViewModel :HomeViewModelProtocol = HomeViewModel(selectedCityApi: SelectedCityApi(), weatherApi: WeatherApi())
+    let homeViewModel :HomeViewModelProtocol = HomeViewModel(selectedCityApi: SelectedCityApi(), weatherApi: WeatherApi(),settingsApi: SettingsApi())
     //Views
     var loader: UILoaderView?
     private let cityLabel : UILabel =  {
@@ -22,11 +22,45 @@ class ViewController: UIViewController, LoaderProtocol {
         label.textColor = R.Colors.transparentWhite
         return label
     }()
+    private let weatherImageView : UIImageView  = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+        
+    }()
+    private let dailyTemperatureLabel :UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = Theme.getHugeFont()
+        label.textColor = R.Colors.white
+        return label
+    }()
+    private let lowTemperatureLabel :UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = Theme.getNormalFont()
+        label.textColor = R.Colors.transparentWhite
+        return label
+    }()
+    private let highTemperatureLabel :UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = Theme.getNormalFont()
+        label.textColor = R.Colors.transparentWhite
+        return label
+    }()
+    private let cloudsLabel :UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = Theme.getNormalFont()
+        label.textColor = R.Colors.transparentWhite
+        return label
+    }()
     
     private let searchBar : UISearchBar = {
         let searchBar = UISearchBar ()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        //todo set needed style a
+        //todo set needed style
         
         //solution for setting font in search bar.  -> solution from stack: https://stackoverflow.com/questions/26441958/changing-search-bar-placeholder-text-font-in-swift/43185700
         let textFieldInsideUISearchBar = searchBar.value(forKey: "searchField") as? UITextField
@@ -42,7 +76,7 @@ class ViewController: UIViewController, LoaderProtocol {
         setupView()
         //initialize data observers
         initializeLoaderDriver()
-        initializeLocationDriver()
+        initializeHomeDriver()
         //initialize data retrival
         homeViewModel.getData()
         
@@ -73,6 +107,12 @@ class ViewController: UIViewController, LoaderProtocol {
         view.backgroundColor = R.Colors.green
         view.addSubview(cityLabel)
         view.addSubview(searchBar)
+        view.addSubview(weatherImageView)
+        view.addSubview(dailyTemperatureLabel)
+        view.addSubview(lowTemperatureLabel)
+        view.addSubview(highTemperatureLabel)
+        view.addSubview(cloudsLabel)
+        
         //setup constraints
         var constraints = [NSLayoutConstraint]()
         //city label constraints -> position top and center.
@@ -82,31 +122,32 @@ class ViewController: UIViewController, LoaderProtocol {
             searchBar.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 20),
             searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 60),
             searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -60),
+            // position imageview to center of view. set imageview size to 1/4 of the screen
+            weatherImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
+            weatherImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0),
+            weatherImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25),
+            //set current temp above image view
+            dailyTemperatureLabel.bottomAnchor.constraint(equalTo: weatherImageView.topAnchor, constant: 40),
+            dailyTemperatureLabel.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 80),
+            dailyTemperatureLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
+            
+        
         ]
         NSLayoutConstraint.activate(constraints)
     }
     
-    private func initializeLocationDriver(){
-        homeViewModel.location
+    private func initializeHomeDriver(){
+        homeViewModel.homeData
             //as driver automatically handles UI thread change and it handles error events.
-            .asDriver { (error) -> SharedSequence<DriverSharingStrategy, SelectedCity> in
+            .asDriver { (error) -> SharedSequence<DriverSharingStrategy, Home> in
                 return SharedSequence.empty()
             }
-            .do(onNext: {[unowned self] (selectedCity) in
-                self.cityLabel.text = selectedCity.name
-            })
-            .drive()
-            .disposed(by: disposableBag)
-    }
-    
-    private func initializeWeatherDriver(){
-        homeViewModel.weather
-            //as driver automatically handles UI thread change and it handles error events.
-            .asDriver { (error) -> SharedSequence<DriverSharingStrategy, Weather> in
-                return SharedSequence.empty()
-            }
-            .do(onNext: {[unowned self] (weather) in
-                
+            .do(onNext: {[unowned self] (home) in
+                self.cityLabel.text = home.city
+                self.dailyTemperatureLabel.text = home.dailyTemperature
+                self.lowTemperatureLabel.text = home.lowTemp
+                self.highTemperatureLabel.text = home.highTemp
+                self.cloudsLabel.text = home.cloudStatus
             })
             .drive()
             .disposed(by: disposableBag)
