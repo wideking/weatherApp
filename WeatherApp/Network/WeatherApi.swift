@@ -17,7 +17,10 @@ final class WeatherApi:WeatherApiProtocol{
      - returns: Observable Weather response
      */
     func getWeatherObservable(latitude lat:Double, longitute lng:Double) -> Observable<WeatherResponse> {
-        return  RestManager.requestObservable(url: Configuration.weatherServer.url+String(lat)+","+String(lng), params: nil, method: .get, headers: nil)
+        let params : Parameters=[
+            "units":"si"
+        ]
+        return  RestManager.requestObservable(url: Configuration.weatherServer.url+String(lat)+","+String(lng), params: params, method: .get, headers: nil)
     }
 }
 
