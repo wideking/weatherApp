@@ -19,6 +19,8 @@
 		E22F07F12074CC12000636E2 /* DailyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F07EF2074CC12000636E2 /* DailyWeather.swift */; };
 		E22F07F52074CC17000636E2 /* RestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F07F32074CC17000636E2 /* RestManager.swift */; };
 		E22F07F62074CC17000636E2 /* WeatherApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F07F42074CC17000636E2 /* WeatherApi.swift */; };
+		E238D7DB207B4D5E0019831D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E238D7DA207B4D5E0019831D /* HomeView.swift */; };
+		E238D7DD207B87840019831D /* BottomWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E238D7DC207B87840019831D /* BottomWeatherView.swift */; };
 		E253CC212074E528006F379D /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E253CC202074E528006F379D /* Configuration.swift */; };
 		E253CC232074FD54006F379D /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E253CC222074FD54006F379D /* WeatherResponse.swift */; };
 		E253CC2720750A62006F379D /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E253CC2620750A62006F379D /* RequestHandler.swift */; };
@@ -72,6 +74,8 @@
 		E22F07EF2074CC12000636E2 /* DailyWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyWeather.swift; sourceTree = "<group>"; };
 		E22F07F32074CC17000636E2 /* RestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestManager.swift; sourceTree = "<group>"; };
 		E22F07F42074CC17000636E2 /* WeatherApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherApi.swift; sourceTree = "<group>"; };
+		E238D7DA207B4D5E0019831D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E238D7DC207B87840019831D /* BottomWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomWeatherView.swift; sourceTree = "<group>"; };
 		E253CC202074E528006F379D /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		E253CC222074FD54006F379D /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		E253CC2620750A62006F379D /* RequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHandler.swift; sourceTree = "<group>"; };
@@ -200,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				E22F07C42074CB01000636E2 /* HomeViewController.swift */,
+				E238D7DA207B4D5E0019831D /* HomeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -273,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				E2678176207908920095B10C /* Loader */,
+				E238D7DC207B87840019831D /* BottomWeatherView.swift */,
 			);
 			path = "Custom views";
 			sourceTree = "<group>";
@@ -513,7 +519,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E238D7DB207B4D5E0019831D /* HomeView.swift in Sources */,
 				E22F07C52074CB01000636E2 /* HomeViewController.swift in Sources */,
+				E238D7DD207B87840019831D /* BottomWeatherView.swift in Sources */,
 				E22F07EC2074CC00000636E2 /* HomeViewModel.swift in Sources */,
 				E267818520794D460095B10C /* CurrentWeather.swift in Sources */,
 				E2A129E92076090C00A28892 /* SelectedCityApi.swift in Sources */,

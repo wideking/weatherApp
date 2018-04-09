@@ -8,9 +8,9 @@
 
 import UIKit
 struct Theme {
-    static let normalFontSize : CGFloat = 14
-    static let extraFontSize : CGFloat = 48
-    static let hugeFontSize : CGFloat = 72
+    static let normalFontSize : CGFloat = 15
+    static let extraFontSize : CGFloat = 34
+    static let hugeFontSize : CGFloat = 45
     
     static func getNormalFont() -> UIFont {
         return UIFont.systemFont(ofSize: normalFontSize)

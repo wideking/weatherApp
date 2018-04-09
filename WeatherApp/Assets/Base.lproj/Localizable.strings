@@ -7,3 +7,5 @@
 */
 "loading_weather" = "Loading weather data";
 "general_error" = "Something went wrong. Please Try again.";
+"low_temperature" = "%@ \n low";
+"high_temperature" = "%@ \n high";
