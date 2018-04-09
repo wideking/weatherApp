@@ -9,3 +9,4 @@
 "general_error" = "Ups. Nešto je pošlo po zlu. Pokušaj ponovo.";
 "low_temperature" = "%@ \n najniža";
 "high_temperature" = "%@ \n najvišlja";
+"type_something" = "Upiši nešto";

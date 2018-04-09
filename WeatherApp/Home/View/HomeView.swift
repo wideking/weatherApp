@@ -26,6 +26,7 @@ class HomeView : UIView{
     let dailyTemperatureLabel :UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
         label.font = Theme.getHugeFont()
         label.textColor = R.Colors.white
         return label
@@ -66,13 +67,24 @@ class HomeView : UIView{
     let searchBar : UISearchBar = {
         let searchBar = UISearchBar ()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        //todo set needed style
         
         //solution for setting font in search bar.  -> solution from stack: https://stackoverflow.com/questions/26441958/changing-search-bar-placeholder-text-font-in-swift/43185700
-        let textFieldInsideUISearchBar = searchBar.value(forKey: "searchField") as? UITextField
-        let placeholderLabel       = textFieldInsideUISearchBar?.value(forKey: "placeholderLabel") as? UILabel
-        placeholderLabel?.font     = Theme.getNormalFont()
-        textFieldInsideUISearchBar?.font = Theme.getNormalFont()
+        searchBar.setImage(UIImage(named: "search_icon"), for: .search, state: .normal)
+        searchBar.placeholder = NSLocalizedString("type_something", comment: .empty)
+        clearBackgroundColor(searchBar: searchBar)
+        
+        if  let textFieldInsideUISearchBar = searchBar.value(forKey: "searchField") as? UITextField {
+            let placeholderLabel = textFieldInsideUISearchBar.value(forKey: "placeholderLabel") as? UILabel
+            placeholderLabel?.font  = Theme.getNormalFont()
+            
+            textFieldInsideUISearchBar.font = Theme.getNormalFont()
+            // Background color
+            textFieldInsideUISearchBar.backgroundColor = UIColor.white
+            // Rounded corner
+            textFieldInsideUISearchBar.layer.cornerRadius = 18
+            textFieldInsideUISearchBar.clipsToBounds = true
+            
+        }
         return searchBar
     }()
     
@@ -164,30 +176,42 @@ class HomeView : UIView{
             dailyTemperatureLabel.centerXAnchor.constraint(equalTo: topSubview.centerXAnchor, constant: 0),
             //handle rotation dimension
             dailyTemperatureLabel.heightAnchor.constraint(lessThanOrEqualTo: topSubview.heightAnchor, multiplier: 0.5),
-        //settings button
-        settingsButton.centerYAnchor.constraint(equalTo: dailyTemperatureLabel.centerYAnchor,constant : settingsYConstant),
-        settingsButton.widthAnchor.constraint(equalToConstant: settingsSize),
-        settingsButton.heightAnchor.constraint(equalToConstant: settingsSize),
-        settingsButton.leadingAnchor.constraint(equalTo: topSubview.leadingAnchor, constant : settingsXConstant),
-        //set low temperature
-        lowTemperatureLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-        lowTemperatureLabel.trailingAnchor.constraint(equalTo: weatherImageView.leadingAnchor, constant: -20),
-        lowTemperatureLabel.centerYAnchor.constraint(equalTo: weatherImageView.centerYAnchor),
-        //set high temperature
-        highTemperatureLabel.leadingAnchor.constraint(equalTo: weatherImageView.trailingAnchor, constant: 20),
-        highTemperatureLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-        highTemperatureLabel.centerYAnchor.constraint(equalTo: weatherImageView.centerYAnchor),
-        //set cloud label
-        summaryLabel.topAnchor.constraint(equalTo: weatherImageView.bottomAnchor,constant: 20),
-        summaryLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 40),
-        summaryLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40),
-        summaryLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-        //set bottom stackview
-        bottomSubview.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 20),
-        bottomSubview.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        bottomSubview.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
-        bottomSubview.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            //settings button
+            settingsButton.centerYAnchor.constraint(equalTo: dailyTemperatureLabel.centerYAnchor,constant : settingsYConstant),
+            settingsButton.widthAnchor.constraint(equalToConstant: settingsSize),
+            settingsButton.heightAnchor.constraint(equalToConstant: settingsSize),
+            settingsButton.leadingAnchor.constraint(equalTo: topSubview.leadingAnchor, constant : settingsXConstant),
+            //set low temperature
+            lowTemperatureLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            lowTemperatureLabel.trailingAnchor.constraint(equalTo: weatherImageView.leadingAnchor, constant: -20),
+            lowTemperatureLabel.centerYAnchor.constraint(equalTo: weatherImageView.centerYAnchor),
+            //set high temperature
+            highTemperatureLabel.leadingAnchor.constraint(equalTo: weatherImageView.trailingAnchor, constant: 20),
+            highTemperatureLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            highTemperatureLabel.centerYAnchor.constraint(equalTo: weatherImageView.centerYAnchor),
+            //set cloud label
+            summaryLabel.topAnchor.constraint(equalTo: weatherImageView.bottomAnchor,constant: 20),
+            summaryLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 40),
+            summaryLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40),
+            summaryLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            //set bottom stackview
+            bottomSubview.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 20),
+            bottomSubview.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bottomSubview.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            bottomSubview.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
         ]
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    private static func clearBackgroundColor(searchBar: UISearchBar) {
+        guard let UISearchBarBackground: AnyClass = NSClassFromString("UISearchBarBackground") else { return }
+        
+        for view in searchBar.subviews {
+            for subview in view.subviews {
+                if subview.isKind(of: UISearchBarBackground) {
+                    subview.alpha = 0
+                }
+            }
+        }
     }
 }
