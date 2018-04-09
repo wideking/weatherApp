@@ -130,8 +130,12 @@ class ViewController: UIViewController, LoaderProtocol {
             dailyTemperatureLabel.bottomAnchor.constraint(equalTo: weatherImageView.topAnchor, constant: 40),
             dailyTemperatureLabel.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 80),
             dailyTemperatureLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
+            //set low temperature
+            lowTemperatureLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
+            lowTemperatureLabel.trailingAnchor.constraint(equalTo: weatherImageView.leadingAnchor),
+            lowTemperatureLabel.centerYAnchor.constraint(equalTo: weatherImageView.centerYAnchor),
+            //see if we need to center low temp between constraints.
             
-        
         ]
         NSLayoutConstraint.activate(constraints)
     }
