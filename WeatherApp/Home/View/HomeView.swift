@@ -191,14 +191,14 @@ class HomeView : UIView{
             highTemperatureLabel.centerYAnchor.constraint(equalTo: weatherImageView.centerYAnchor),
             //set cloud label
             summaryLabel.topAnchor.constraint(equalTo: weatherImageView.bottomAnchor,constant: 20),
-            summaryLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 40),
+            summaryLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
             summaryLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40),
-            summaryLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             //set bottom stackview
             bottomSubview.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 20),
             bottomSubview.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             bottomSubview.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             bottomSubview.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            
         ]
         NSLayoutConstraint.activate(constraints)
     }

@@ -42,10 +42,7 @@ class BottomWeatherView: UIStackView {
         //setup constraints
         let constraints = [
             //setup title
-            title.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 8),
-            title.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: 8),
             title.bottomAnchor.constraint(equalTo: imageView.topAnchor, constant: -8),
-            imageView.widthAnchor.constraint(equalToConstant: 50),
             imageView.heightAnchor.constraint(equalToConstant: 50)
         ]
         NSLayoutConstraint.activate(constraints)
