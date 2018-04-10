@@ -64,28 +64,10 @@ class HomeView : UIView{
         button.setImage(UIImage(named: "settings_icon"), for: UIControlState.normal)
         return button
     }()
-    let searchBar : UISearchBar = {
-        let searchBar = UISearchBar ()
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        
-        //solution for setting font in search bar.  -> solution from stack: https://stackoverflow.com/questions/26441958/changing-search-bar-placeholder-text-font-in-swift/43185700
-        searchBar.setImage(UIImage(named: "search_icon"), for: .search, state: .normal)
-        searchBar.placeholder = NSLocalizedString("type_something", comment: .empty)
-        clearBackgroundColor(searchBar: searchBar)
-        
-        if  let textFieldInsideUISearchBar = searchBar.value(forKey: "searchField") as? UITextField {
-            let placeholderLabel = textFieldInsideUISearchBar.value(forKey: "placeholderLabel") as? UILabel
-            placeholderLabel?.font  = Theme.getNormalFont()
-            
-            textFieldInsideUISearchBar.font = Theme.getNormalFont()
-            // Background color
-            textFieldInsideUISearchBar.backgroundColor = UIColor.white
-            // Rounded corner
-            textFieldInsideUISearchBar.layer.cornerRadius = 18
-            textFieldInsideUISearchBar.clipsToBounds = true
-            
-        }
-        return searchBar
+    let searchBar : UISearch = {
+        let search = UISearch()
+        search.translatesAutoresizingMaskIntoConstraints = false
+        return search
     }()
     
     let rainSubview : BottomWeatherView = {
@@ -139,6 +121,7 @@ class HomeView : UIView{
         view.addSubview(lowTemperatureLabel)
         view.addSubview(highTemperatureLabel)
         view.addSubview(summaryLabel)
+        //todo add search click
         
         //setup constraints
         var constraints = [NSLayoutConstraint]()
@@ -201,17 +184,5 @@ class HomeView : UIView{
             
         ]
         NSLayoutConstraint.activate(constraints)
-    }
-    
-    private static func clearBackgroundColor(searchBar: UISearchBar) {
-        guard let UISearchBarBackground: AnyClass = NSClassFromString("UISearchBarBackground") else { return }
-        
-        for view in searchBar.subviews {
-            for subview in view.subviews {
-                if subview.isKind(of: UISearchBarBackground) {
-                    subview.alpha = 0
-                }
-            }
-        }
     }
 }

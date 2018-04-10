@@ -63,19 +63,6 @@ class HomeViewModel : HomeViewModelProtocol {
                                 weatherImage: WeatherImage(rawValue: weather.currentWeather.icon)!)
     
                 })
- 
-                   /* return Home(dailyTemperature: .empty,
-                                lowTemp: .empty,
-                                highTemp: .empty,
-                                cloudStatus: .empty,
-                                rainPercentage: .empty,
-                                windSpeed: .empty,
-                                pressure: .empty,
-                        city: selectedCity.name,
-                        weatherImage: .empty)
-
-                     })
-  */
             }
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: DispatchQoS.background))
             .observeOn(observeOnScheduler)

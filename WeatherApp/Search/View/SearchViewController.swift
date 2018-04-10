@@ -7,9 +7,19 @@
 //
 
 import UIKit
-class SearchViewController : UISearchController {
+class SearchViewController : UIViewController {
+    //MARK: Properties
+    //MARK: Views
+    unowned var searchView : SearchView  {
+        return self.view as! SearchView
+    }
+    
+    override func loadView() {
+        view = SearchView()
+    }
     
     override func viewDidLoad() {
-        //todo continue initialization
+        
     }
+    
 }
