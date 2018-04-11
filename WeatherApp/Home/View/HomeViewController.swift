@@ -9,7 +9,7 @@ import RxSwift
 import RxCocoa
 import UIKit
 
-class ViewController: UIViewController, LoaderProtocol {
+class HomeViewController: UIViewController, LoaderProtocol,UISearchBarDelegate {
     //Mark: Properties
     private var disposableBag = DisposeBag()
     let homeViewModel :HomeViewModelProtocol = HomeViewModel(selectedCityApi: SelectedCityApi(), weatherApi: WeatherApi(),settingsApi: SettingsApi())
@@ -17,6 +17,9 @@ class ViewController: UIViewController, LoaderProtocol {
     var loader: UILoaderView?
     unowned var homeView : HomeView {
         return self.view as! HomeView
+    }
+    unowned var searchBar : UISearch{
+        return homeView.searchBar
     }
     unowned var cityLabel : UILabel {
         return homeView.cityLabel
@@ -48,14 +51,15 @@ class ViewController: UIViewController, LoaderProtocol {
         return homeView.weatherImageView
     }
     
-   //set view to HomeView
+    //set view to HomeView
     override func loadView() {
         self.view = HomeView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        //initialze delegates
+        searchBar.delegate = self
         //initialize data observers
         initializeLoaderDriver()
         initializeHomeDriver()
@@ -67,6 +71,9 @@ class ViewController: UIViewController, LoaderProtocol {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        showSearchScreen()
     }
     
     //MARK: Private functions
@@ -84,7 +91,7 @@ class ViewController: UIViewController, LoaderProtocol {
             .drive()
             .disposed(by: disposableBag)
     }
-
+    
     
     private func initializeHomeDriver(){
         homeViewModel.homeData
@@ -108,7 +115,16 @@ class ViewController: UIViewController, LoaderProtocol {
             .drive()
             .disposed(by: disposableBag)
     }
-    
-    
+    /**
+     Display Search screen modally
+     */
+    private func showSearchScreen(){
+        let searchController = SearchViewController()
+        //set modal presentetion to be over current view so we can see it in the background.
+        searchController.modalPresentationStyle = .overCurrentContext
+        present(searchController, animated: true) { [unowned self] in
+            self.searchBar.resignFirstResponder()
+        }
+    }
 }
 

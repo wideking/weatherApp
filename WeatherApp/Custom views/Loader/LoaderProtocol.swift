@@ -13,7 +13,7 @@ protocol LoaderProtocol {
     var loader : UILoaderView? { get set}
 }
 
-extension LoaderProtocol where Self : ViewController {
+extension LoaderProtocol where Self : HomeViewController {
     //Mark Loader methods
      func showLoaderView(){
         if(loader == nil){

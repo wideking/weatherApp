@@ -11,7 +11,7 @@ import Alamofire
 import RxSwift
 
 class CityApi: CityApiProtocol {
-    func getCitiesByNameObservable(name: String) -> Observable<[City]> {
+    func getCitiesByNameObservable(name: String) -> Observable<GeoCityResponse> {
         let params : Parameters = [
             "placename":name,
             "username":Configuration.geolocationServer.apiKey
@@ -21,5 +21,5 @@ class CityApi: CityApiProtocol {
 }
 
 protocol CityApiProtocol{
-    func getCitiesByNameObservable(name:String) ->Observable<[City]>
+    func getCitiesByNameObservable(name:String) ->Observable<GeoCityResponse>
 }

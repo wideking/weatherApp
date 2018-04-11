@@ -8,12 +8,6 @@
 
 import Foundation
 protocol CloseActionDelegate {
-    
+    func onCloseClicked()
 }
-extension CloseActionDelegate where Self: ViewController {
-    
-    func onCloseClicked(){
-        debugPrint("On close action is clicked!")
-        self.navigationController?.popViewController(animated: true)
-    }
-}
+

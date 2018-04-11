@@ -9,6 +9,7 @@
 import UIKit
 
 class SearchResultViewCell: UITableViewCell {
+    public static let identifier = "SearchCellIndentifier"
     //MARK : Outlets
     @IBOutlet weak var view: UIView!
     @IBOutlet weak var firstCharacterLabel: UILabel!
@@ -25,12 +26,10 @@ class SearchResultViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
     }
     
     //MARK: Private functions
@@ -38,9 +37,6 @@ class SearchResultViewCell: UITableViewCell {
      Load Nib file and setup view our references
      */
     private func setupView(){
-        Bundle.main.loadNibNamed("SearchResultViewCell", owner: self, options: nil)
-        addSubview(view)
-        view.frame = self.frame
     }
     
 }

@@ -13,7 +13,7 @@ class HomeView : UIView{
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Theme.getExtraFont()
-        label.textColor = R.Colors.transparentWhite
+        label.textColor = R.Colors.semiOpaqueWhite
         return label
     }()
     let weatherImageView : UIImageView  = {
@@ -37,7 +37,7 @@ class HomeView : UIView{
         label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Theme.getNormalFont()
-        label.textColor = R.Colors.transparentWhite
+        label.textColor = R.Colors.semiOpaqueWhite
         return label
     }()
     let highTemperatureLabel :UILabel = {
@@ -46,7 +46,7 @@ class HomeView : UIView{
         label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Theme.getNormalFont()
-        label.textColor = R.Colors.transparentWhite
+        label.textColor = R.Colors.semiOpaqueWhite
         return label
     }()
     let summaryLabel :UILabel = {
@@ -54,7 +54,7 @@ class HomeView : UIView{
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines=0
         label.font = Theme.getNormalFont()
-        label.textColor = R.Colors.transparentWhite
+        label.textColor = R.Colors.semiOpaqueWhite
         label.textAlignment = .center
         return label
     }()
@@ -122,7 +122,7 @@ class HomeView : UIView{
         view.addSubview(highTemperatureLabel)
         view.addSubview(summaryLabel)
         //todo add search click
-        
+            
         //setup constraints
         var constraints = [NSLayoutConstraint]()
         //todo is it always necessery to set height of views when using top & bottom anchor points?

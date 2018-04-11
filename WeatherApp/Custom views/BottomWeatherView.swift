@@ -13,7 +13,7 @@ class BottomWeatherView: UIStackView {
     let title : UILabel = {
         let label = UILabel()
         label.font = Theme.getNormalFont()
-        label.textColor = R.Colors.transparentWhite
+        label.textColor = R.Colors.semiOpaqueWhite
         label.numberOfLines = 2
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false

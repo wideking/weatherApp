@@ -27,17 +27,15 @@ class UISearch: UISearchBar {
         placeholder = NSLocalizedString("type_something", comment: .empty)
         UISearch.clearBackgroundColor(searchBar: self as UISearchBar)
         
+        clipsToBounds = true
+        layer.cornerRadius = 25
+        backgroundColor = UIColor.white
+        layer.maskedCorners = [.layerMinXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+        
         if  let textFieldInsideUISearchBar = value(forKey: "searchField") as? UITextField {
             let placeholderLabel = textFieldInsideUISearchBar.value(forKey: "placeholderLabel") as? UILabel
             placeholderLabel?.font  = Theme.getNormalFont()
-            
             textFieldInsideUISearchBar.font = Theme.getNormalFont()
-            // Background color
-            textFieldInsideUISearchBar.backgroundColor = UIColor.white
-            // Rounded corner
-            textFieldInsideUISearchBar.layer.cornerRadius = 18
-            textFieldInsideUISearchBar.clipsToBounds = true
-            
         }
     }
     

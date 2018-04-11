@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 typealias LoaderStatus = (loadingStarted:Bool,loadingFinished:Bool)
-class HomeViewModel : HomeViewModelProtocol {
+class HomeViewModel :NSObject, HomeViewModelProtocol {
     private var disposeBag:DisposeBag = DisposeBag()
     //MARK: Properties
     private let weatherApi : WeatherApiProtocol
@@ -73,7 +73,7 @@ class HomeViewModel : HomeViewModelProtocol {
                     //todo pogledati postoji li bolji način za ovo.
                      self.dataLoading.onNext((loadingStarted: false, loadingFinished: true))
                     if(error.localizedDescription == AppErrors.CityNotSelected.localizedDescription){
-                        debugPrint("error: "+error.localizedDescription+" Location is not selected, setting it to nil!")
+                        debugPrint("error: \(error.localizedDescription) Location is not selected, setting it to nil!")
                     }else{
                         //later add error handling.
                         debugPrint(error)
