@@ -11,6 +11,7 @@ import UIKit
 class SearchResultViewCell: UITableViewCell {
     public static let identifier = "SearchCellIndentifier"
     //MARK : Outlets
+    @IBOutlet weak var separator: UIView!
     @IBOutlet weak var view: UIView!
     @IBOutlet weak var firstCharacterLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!

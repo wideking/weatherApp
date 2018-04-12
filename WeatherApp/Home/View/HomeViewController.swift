@@ -9,7 +9,8 @@ import RxSwift
 import RxCocoa
 import UIKit
 
-class HomeViewController: UIViewController, LoaderProtocol,UISearchBarDelegate {
+class HomeViewController: UIViewController, LoaderProtocol,UISearchBarDelegate,SearchResultDelegate {
+    
     //Mark: Properties
     private var disposableBag = DisposeBag()
     let homeViewModel :HomeViewModelProtocol = HomeViewModel(selectedCityApi: SelectedCityApi(), weatherApi: WeatherApi(),settingsApi: SettingsApi())
@@ -63,8 +64,9 @@ class HomeViewController: UIViewController, LoaderProtocol,UISearchBarDelegate {
         //initialize data observers
         initializeLoaderDriver()
         initializeHomeDriver()
+        initializeModalsDriver()
         //initialize data retrival
-        homeViewModel.getData()
+        homeViewModel.getData(closeSearchOnComplete: false)
         
     }
     
@@ -74,6 +76,10 @@ class HomeViewController: UIViewController, LoaderProtocol,UISearchBarDelegate {
     }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         showSearchScreen()
+    }
+    
+    func searchCompleted() {
+        homeViewModel.getData(closeSearchOnComplete: true)
     }
     
     //MARK: Private functions
@@ -116,11 +122,27 @@ class HomeViewController: UIViewController, LoaderProtocol,UISearchBarDelegate {
             .disposed(by: disposableBag)
     }
     /**
+     Method that listens to the dismissModalEvents. On new dismiss modal events, method will dismiss child modal screens.
+     */
+    private func initializeModalsDriver(){
+        homeViewModel.dismissModalViews
+            .asDriver { (error) -> SharedSequence<DriverSharingStrategy, Bool> in
+                return SharedSequence.empty()
+            }.do(onNext: { [unowned self](_) in
+                //dismiss modals
+                self.dismiss(animated: true, completion: nil)
+            })
+            .drive()
+            .disposed(by: disposableBag)
+    }
+    
+    /**
      Display Search screen modally
      */
     private func showSearchScreen(){
         let searchController = SearchViewController()
         //set modal presentetion to be over current view so we can see it in the background.
+        searchController.resultDelegate = self
         searchController.modalPresentationStyle = .overCurrentContext
         present(searchController, animated: true) { [unowned self] in
             self.searchBar.resignFirstResponder()

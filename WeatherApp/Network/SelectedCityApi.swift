@@ -40,7 +40,6 @@ class SelectedCityApi: RealmApi,SelectedCityApiProtocol{
                     realm.beginWrite()
                 if  let selectedCity =  realm.objects(SelectedCity.self).first{
                     realm.delete(selectedCity)
-                    return Observable.just(true)
                 }
                 realm.add(selectedCity)
                 try realm.commitWrite()

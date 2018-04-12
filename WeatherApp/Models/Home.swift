@@ -52,7 +52,7 @@ enum  WeatherImage:String{
         case .partiallyCloudyNight:
             return (weatherImage: #imageLiteral(resourceName: "partially_cloudy_night"),color:UIColor.darkGray)
         case .rain:
-            return (weatherImage: #imageLiteral(resourceName: "rain"),color:UIColor.yellow)
+            return (weatherImage: #imageLiteral(resourceName: "rain"),color:R.Colors.oceanBlue)
         case .sleet:
             return (weatherImage: #imageLiteral(resourceName: "sleet"),color:UIColor.orange)
         case .snow:
@@ -60,7 +60,7 @@ enum  WeatherImage:String{
         case .thunderstorm:
             return (weatherImage: #imageLiteral(resourceName: "thunderstorm"),color:UIColor.red)
         default: //wind
-            return (weatherImage: #imageLiteral(resourceName: "wind"),color:UIColor.yellow)
+            return (weatherImage: #imageLiteral(resourceName: "wind"),color:R.Colors.periwinkle)
         }
     }
 }

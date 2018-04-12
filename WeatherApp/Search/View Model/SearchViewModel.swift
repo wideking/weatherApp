@@ -13,6 +13,7 @@ typealias Search = (query:String, results :[City])
 class SearchViewModel: SearchViewModelProtocol {
     //MARK: Properties
     private let cityApi: CityApiProtocol
+    private let selectedCityApi: SelectedCityApiProtocol
     private let disposeBag = DisposeBag()
     
     //Observable properties
@@ -22,19 +23,49 @@ class SearchViewModel: SearchViewModelProtocol {
             dataSetChanged.onNext(true)
         }
     }
+    var selectedCity: ReplaySubject<SelectedCity>
     var dataSetChanged : ReplaySubject<Bool>
     var dataLoading: ReplaySubject<LoaderStatus>
     //Initializer
     /**
      - parameter cityApi: City Api manager. Server manager that handles search request on the server.
      */
-    init(cityApi: CityApiProtocol) {
+    init(cityApi: CityApiProtocol,selectedCityApi: SelectedCityApiProtocol) {
         self.cityApi = cityApi
+        self.selectedCityApi = selectedCityApi
         self.searchQueryObservable = PublishSubject()
         tableData = []
         dataSetChanged = ReplaySubject.create(bufferSize: 1)
         dataLoading = ReplaySubject.create(bufferSize: 1)
+        selectedCity = ReplaySubject.create(bufferSize: 1)
         initializeSearchDisposable()
+    }
+    /**
+     Method for saving selected city.
+     - returns: Returns Observable that will parse City object into Selected city and save it to the realm db.
+     */
+    func saveCity(city:City) {
+        Observable.deferred({ [unowned self] () -> Observable<SelectedCity> in
+            let selectedCity = SelectedCity()
+            selectedCity.lat = city.lat
+            selectedCity.lng = city.lng
+            selectedCity.state = city.state
+            selectedCity.name = city.name
+            return Observable.zip(Observable.just(selectedCity), self.selectedCityApi.saveSelectedCityObservable(selectedCity: selectedCity), resultSelector: { (selectedCity, _) -> SelectedCity in
+                return selectedCity
+            })
+        })
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: DispatchQoS.background))
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self](selectedCity) in
+                self.dataLoading.onNext((loadingStarted: false, loadingFinished: false))
+                self.selectedCity.onNext(selectedCity)
+                }, onError: { [unowned self](error) in
+                    debugPrint("error on saving data. More info \(error)")
+                    self.dataLoading.onNext((loadingStarted: false, loadingFinished: false))
+                    //todo handle error message.
+            })
+            .disposed(by: disposeBag)
     }
     
     /**
@@ -51,11 +82,15 @@ class SearchViewModel: SearchViewModelProtocol {
             .map({ (cityResponse) -> [SearchResult] in
                 return cityResponse.cities.map({ (city) -> SearchResult in
                     let prefix = String(city.name.prefix(1)).uppercased()
-                    var prefixColor = PrefixColor(rawValue: prefix)
-                    if(prefixColor == nil ){
+                    let title = city.name + ","+city.state
+                    let prefixColor : PrefixColor
+                    
+                    if let color  = PrefixColor(rawValue: prefix){
+                        prefixColor = color
+                    }else{
                         prefixColor = PrefixColor(rawValue: "A")!
                     }
-                    return SearchResult(prefix: prefix,title: city.name + ","+city.state, prefixColor:prefixColor!)
+                    return SearchResult(prefix: prefix,title: title, prefixColor: prefixColor,city: city)
                 })
             })
             .do(onNext: { [unowned self](seachResults) in
@@ -74,4 +109,6 @@ protocol SearchViewModelProtocol {
     var tableData : [SearchResult] {get}
     var dataSetChanged : ReplaySubject<Bool>{get}
     var dataLoading : ReplaySubject<LoaderStatus>{get}
+    var selectedCity : ReplaySubject<SelectedCity> {get}
+    func saveCity(city:City)
 }

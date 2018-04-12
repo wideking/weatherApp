@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="SearchResultViewCell" customModule="WeatherApp" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" id="KGk-i7-Jjw" customClass="SearchResultViewCell" customModule="WeatherApp" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -27,7 +27,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adasda" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZl-10-hGP" userLabel="First character label">
-                        <rect key="frame" x="0.0" y="0.0" width="50" height="20.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="52.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="eEz-Mb-iwt"/>
                         </constraints>
@@ -35,31 +35,42 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n1X-qM-B0c" userLabel="Title label">
-                        <rect key="frame" x="58" y="0.0" width="262" height="20.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="4" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n1X-qM-B0c" userLabel="Title label">
+                        <rect key="frame" x="58" y="16" width="262" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="trb-FV-0ja" userLabel="Separator">
+                        <rect key="frame" x="0.0" y="51.5" width="320" height="1"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="hMF-FS-CPb"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="53V-e1-ZFP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="-278" id="3LX-VB-UOF" userLabel="Background view.leading = leading"/>
                     <constraint firstAttribute="trailing" secondItem="53V-e1-ZFP" secondAttribute="trailing" id="5IT-EM-OkN"/>
-                    <constraint firstItem="n1X-qM-B0c" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="69R-oa-v6j"/>
+                    <constraint firstItem="n1X-qM-B0c" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="6G3-RZ-rRr"/>
                     <constraint firstItem="n1X-qM-B0c" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" id="6jP-zn-ZE0"/>
                     <constraint firstItem="xZl-10-hGP" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottom" id="FTE-aA-GgF"/>
-                    <constraint firstItem="n1X-qM-B0c" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottom" id="JZL-EM-Rag"/>
+                    <constraint firstItem="trb-FV-0ja" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" id="Meb-11-GV4"/>
+                    <constraint firstItem="trb-FV-0ja" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottom" id="PXG-55-dPH"/>
                     <constraint firstAttribute="bottom" secondItem="53V-e1-ZFP" secondAttribute="bottom" id="T1Z-Sv-ltJ"/>
                     <constraint firstItem="53V-e1-ZFP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="b3h-jg-SsY"/>
+                    <constraint firstItem="n1X-qM-B0c" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottom" constant="-16" id="eyG-sa-eIh"/>
                     <constraint firstItem="xZl-10-hGP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="hf9-gT-uox"/>
                     <constraint firstItem="n1X-qM-B0c" firstAttribute="leading" secondItem="xZl-10-hGP" secondAttribute="trailing" constant="8" id="iVT-Zh-V64"/>
                     <constraint firstItem="xZl-10-hGP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="lh1-Ta-Pb3"/>
+                    <constraint firstItem="trb-FV-0ja" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="yAh-qU-wrh"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="contentView" destination="H2p-sc-9uM" id="Z3l-Vf-4uQ"/>
                 <outlet property="firstCharacterLabel" destination="xZl-10-hGP" id="3fO-7u-51B"/>
+                <outlet property="separator" destination="trb-FV-0ja" id="E2e-hc-1HX"/>
                 <outlet property="titleLabel" destination="n1X-qM-B0c" id="qua-jK-PiO"/>
                 <outlet property="view" destination="H2p-sc-9uM" id="0tW-xd-7w8"/>
             </connections>

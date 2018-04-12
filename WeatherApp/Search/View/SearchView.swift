@@ -9,12 +9,18 @@ import SnapKit
 import UIKit
 
 class SearchView: UIView {
-    var closeDelegate : CloseActionDelegate?
+   weak var closeDelegate : CloseActionDelegate?
     //MARK: Views
     let topConstainer : UIView = {
         let view = UIView()
         view.backgroundColor = R.Colors.semiOpaqueWhite
         view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    let backgroundView : UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = R.Colors.transparentWhite
         return view
     }()
     let closeButtonContainer: UIView = {
@@ -42,6 +48,8 @@ class SearchView: UIView {
         let tableView = UITableView()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        tableView.keyboardDismissMode = .onDrag
         return tableView
     }()
     //MARK: Initializers
@@ -59,10 +67,12 @@ class SearchView: UIView {
     private func setupView(){
         //setup actions
         closeButton.addTarget(self, action: #selector(closeClicked(sender:)), for: .touchUpInside)
-        backgroundColor = R.Colors.transparentWhite
+        
+        tableView.backgroundColor = backgroundView.backgroundColor
         closeButtonContainer.addSubview(closeButton)
         topConstainer.addSubview(closeButtonContainer)
         topConstainer.addSubview(searchBar)
+        addSubview(backgroundView)
         addSubview(topConstainer)
         addSubview(tableView)
     
@@ -106,6 +116,9 @@ class SearchView: UIView {
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
             make.leading.equalTo(self.safeAreaLayoutGuide.snp.leading)
             make.trailing.equalTo(self.safeAreaLayoutGuide.snp.trailing)
+        }
+        backgroundView.snp.makeConstraints {[unowned self] (make) in
+            make.edges.equalTo(self.snp.edges)
         }
     }
     //MARK: Actions

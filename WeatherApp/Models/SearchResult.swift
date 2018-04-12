@@ -12,6 +12,7 @@ public struct SearchResult {
     let prefix: String
     let title: String
     let prefixColor: PrefixColor
+    let city : City
 }
 enum PrefixColor : String {
     case A = "A"

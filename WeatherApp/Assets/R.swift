@@ -12,6 +12,9 @@ enum R{
         static let grey = UIColor.gray
         static let black = UIColor.black
         static let white = UIColor.white
+        static let oceanBlue = UIColor(displayP3Red: 0, green: 168/255, blue: 1, alpha: 1)
+       
+        static let periwinkle = UIColor(displayP3Red: 156/255, green: 136/255, blue: 1, alpha: 1)
         static let green = UIColor(displayP3Red: 102/255, green: 171/255, blue: 34/255, alpha: 1)
         static let semiOpaqueWhite = UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.65)
         static let semiTransparentWhite = UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.5)

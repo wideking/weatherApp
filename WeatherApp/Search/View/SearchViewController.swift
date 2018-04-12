@@ -9,11 +9,12 @@
 import UIKit
 import RxCocoa
 import RxSwift
-class SearchViewController : UIViewController, CloseActionDelegate,UISearchBarDelegate,UITableViewDelegate, UITableViewDataSource {
+class SearchViewController : UIViewController, CloseActionDelegate,UISearchBarDelegate,UITableViewDelegate, UITableViewDataSource,UIGestureRecognizerDelegate {
     
     //MARK: Properties
+    weak var resultDelegate : SearchResultDelegate? = nil
     let disposeBag = DisposeBag()
-    let searchViewModel: SearchViewModelProtocol = SearchViewModel(cityApi: CityApi())
+    var searchViewModel: SearchViewModelProtocol = SearchViewModel(cityApi: CityApi(), selectedCityApi: SelectedCityApi())
     //MARK: Views
     unowned var searchView: SearchView  {
         return self.view as! SearchView
@@ -38,15 +39,23 @@ class SearchViewController : UIViewController, CloseActionDelegate,UISearchBarDe
         tableView.dataSource = self
         let nib =  UINib.init(nibName: "SearchResultViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: SearchResultViewCell.identifier)
-        tableView.estimatedRowHeight = 47
+        tableView.estimatedRowHeight = 50
         //setup drivers
         setupLoaderDriver()
         setupDataSetDriver()
+        setupSearchSaveDriver()
+        //setup dismiss action
+        let gestureRecognizer  = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        gestureRecognizer.numberOfTapsRequired = 1
+        gestureRecognizer.cancelsTouchesInView = false
+        gestureRecognizer.delegate = self
+        view.addGestureRecognizer(gestureRecognizer)
     }
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         submitSearchQuery(query: searchBar.text)
+        searchBar.resignFirstResponder()
     }
     
     
@@ -57,7 +66,7 @@ class SearchViewController : UIViewController, CloseActionDelegate,UISearchBarDe
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchViewModel.tableData.count
     }
-    
+    //setup table view content
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->  UITableViewCell {
         //find reusable cell
         guard let cell = (tableView.dequeueReusableCell(withIdentifier: SearchResultViewCell.identifier, for: indexPath) as? SearchResultViewCell) else {
@@ -65,11 +74,17 @@ class SearchViewController : UIViewController, CloseActionDelegate,UISearchBarDe
         }
         
         let searchResult = searchViewModel.tableData[indexPath.row]
+        let color = searchResult.prefixColor.value()
         cell.titleLabel.text = searchResult.title
         cell.firstCharacterLabel.text = searchResult.prefix
-        cell.firstCharacterLabel.backgroundColor = searchResult.prefixColor.value()
-        
+        cell.firstCharacterLabel.backgroundColor = color
+        cell.separator.backgroundColor = color
         return cell
+    }
+    //Handle table view selection
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let searchResult = searchViewModel.tableData[indexPath.row]
+        searchViewModel.saveCity(city: searchResult.city)
     }
     
     //MARK: Private methods
@@ -104,5 +119,19 @@ class SearchViewController : UIViewController, CloseActionDelegate,UISearchBarDe
                 self.tableView.reloadData()
             }).drive()
             .disposed(by: disposeBag)
+    }
+    private func setupSearchSaveDriver(){
+        searchViewModel.selectedCity.asDriver { (error) -> SharedSequence<DriverSharingStrategy, SelectedCity> in
+            return SharedSequence.empty()
+            }.do(onNext: {[unowned self](selectedCity) in
+                self.resultDelegate?.searchCompleted()
+            }).drive()
+        .disposed(by: disposeBag)
+    }
+    @objc private func dismissKeyboard(){
+        if(searchBar.isFirstResponder){
+            debugPrint("Dismissing keyboard")
+            searchBar.endEditing(true)
+        }
     }
 }

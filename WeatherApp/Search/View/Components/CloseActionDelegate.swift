@@ -7,7 +7,7 @@
 //
 
 import Foundation
-protocol CloseActionDelegate {
+protocol CloseActionDelegate: class {
     func onCloseClicked()
 }
 

@@ -39,6 +39,7 @@
 		E27E8DAF20779A49001CD79A /* R.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E8DAE20779A49001CD79A /* R.swift */; };
 		E27E8DB220779B4D001CD79A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E8DB120779B4D001CD79A /* Theme.swift */; };
 		E27E8DB72077A056001CD79A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E27E8DB92077A056001CD79A /* Localizable.strings */; };
+		E28283C3207F61470062F55C /* SearchResultDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28283C2207F61470062F55C /* SearchResultDelegate.swift */; };
 		E28E27D6207E4D4000824A78 /* UICloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E27D5207E4D4000824A78 /* UICloseButton.swift */; };
 		E28E27D8207E536F00824A78 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E27D7207E536F00824A78 /* SearchResult.swift */; };
 		E2A031DD207CD7B10071769B /* GeoCityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A031DC207CD7B10071769B /* GeoCityResponse.swift */; };
@@ -108,6 +109,7 @@
 		E27E8DB82077A056001CD79A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E27E8DBA2077A05C001CD79A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E27E8DBB2077A062001CD79A /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E28283C2207F61470062F55C /* SearchResultDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDelegate.swift; sourceTree = "<group>"; };
 		E28E27D5207E4D4000824A78 /* UICloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICloseButton.swift; sourceTree = "<group>"; };
 		E28E27D7207E536F00824A78 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		E2A031DC207CD7B10071769B /* GeoCityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoCityResponse.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 			children = (
 				E238D7E2207B9F300019831D /* View Model */,
 				E238D7E1207B9F260019831D /* View */,
+				E28283C2207F61470062F55C /* SearchResultDelegate.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -594,6 +597,7 @@
 			files = (
 				E238D7DB207B4D5E0019831D /* HomeView.swift in Sources */,
 				E22F07C52074CB01000636E2 /* HomeViewController.swift in Sources */,
+				E28283C3207F61470062F55C /* SearchResultDelegate.swift in Sources */,
 				E2A031E1207CEE010071769B /* CloseActionDelegate.swift in Sources */,
 				E238D7DD207B87840019831D /* BottomWeatherView.swift in Sources */,
 				E22F07EC2074CC00000636E2 /* HomeViewModel.swift in Sources */,
