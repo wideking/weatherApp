@@ -19,39 +19,41 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZl-10-hGP" userLabel="First character label">
-                        <rect key="frame" x="0.0" y="0.0" width="42" height="43.5"/>
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="53V-e1-ZFP" userLabel="Background view">
+                        <rect key="frame" x="-278" y="0.0" width="598" height="50"/>
+                        <color key="backgroundColor" red="0.035664957461096249" green="0.63402687823834203" blue="0.21510597306209125" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="42" id="CFt-5v-ZeW"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="9jR-LD-Dxb"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adasda" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZl-10-hGP" userLabel="First character label">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="20.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="eEz-Mb-iwt"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="53V-e1-ZFP" userLabel="Background view">
-                        <rect key="frame" x="42" y="0.0" width="278" height="43.5"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n1X-qM-B0c" userLabel="Title label">
-                        <rect key="frame" x="50" y="0.0" width="270" height="43.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n1X-qM-B0c" userLabel="Title label">
+                        <rect key="frame" x="58" y="0.0" width="262" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="53V-e1-ZFP" firstAttribute="leading" secondItem="xZl-10-hGP" secondAttribute="trailing" id="5ZL-mI-n6Z"/>
-                    <constraint firstAttribute="trailing" secondItem="53V-e1-ZFP" secondAttribute="trailing" id="74o-KJ-OLW"/>
-                    <constraint firstItem="xZl-10-hGP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="92I-AY-L7A"/>
-                    <constraint firstAttribute="bottom" secondItem="53V-e1-ZFP" secondAttribute="bottom" id="J3O-1F-cuu"/>
-                    <constraint firstAttribute="bottom" secondItem="n1X-qM-B0c" secondAttribute="bottom" id="K9b-pl-Hy0"/>
-                    <constraint firstAttribute="trailing" secondItem="53V-e1-ZFP" secondAttribute="trailing" id="Lza-Nb-h5a"/>
-                    <constraint firstItem="xZl-10-hGP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="P12-TW-6kp"/>
-                    <constraint firstAttribute="trailing" secondItem="n1X-qM-B0c" secondAttribute="trailing" id="Pxl-bL-reE"/>
-                    <constraint firstItem="53V-e1-ZFP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Q9e-Jb-glI"/>
-                    <constraint firstItem="n1X-qM-B0c" firstAttribute="leading" secondItem="xZl-10-hGP" secondAttribute="trailing" constant="8" id="Rpl-20-BHA"/>
-                    <constraint firstItem="n1X-qM-B0c" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="SjF-Lo-Niq"/>
-                    <constraint firstAttribute="bottom" secondItem="xZl-10-hGP" secondAttribute="bottom" id="xRe-5H-CwW"/>
+                    <constraint firstItem="53V-e1-ZFP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="-278" id="3LX-VB-UOF" userLabel="Background view.leading = leading"/>
+                    <constraint firstAttribute="trailing" secondItem="53V-e1-ZFP" secondAttribute="trailing" id="5IT-EM-OkN"/>
+                    <constraint firstItem="n1X-qM-B0c" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="69R-oa-v6j"/>
+                    <constraint firstItem="n1X-qM-B0c" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" id="6jP-zn-ZE0"/>
+                    <constraint firstItem="xZl-10-hGP" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottom" id="FTE-aA-GgF"/>
+                    <constraint firstItem="n1X-qM-B0c" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottom" id="JZL-EM-Rag"/>
+                    <constraint firstAttribute="bottom" secondItem="53V-e1-ZFP" secondAttribute="bottom" id="T1Z-Sv-ltJ"/>
+                    <constraint firstItem="53V-e1-ZFP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="b3h-jg-SsY"/>
+                    <constraint firstItem="xZl-10-hGP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="hf9-gT-uox"/>
+                    <constraint firstItem="n1X-qM-B0c" firstAttribute="leading" secondItem="xZl-10-hGP" secondAttribute="trailing" constant="8" id="iVT-Zh-V64"/>
+                    <constraint firstItem="xZl-10-hGP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="lh1-Ta-Pb3"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
